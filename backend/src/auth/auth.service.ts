@@ -26,7 +26,7 @@ export class AuthService {
 
   async signup(@Body() signupData: SignupDto) {
     try {
-      const { name, email, password } = signupData;
+      const { username, email, password } = signupData;
 
       // check if email is in use
       const emailInUse = await this.userModel.findOne({
@@ -41,7 +41,7 @@ export class AuthService {
 
       // create user document and save in mongodb
       await this.userModel.create({
-        name,
+        username,
         email,
         password: hashedPassword,
       });
