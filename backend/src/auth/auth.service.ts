@@ -33,20 +33,22 @@ export class AuthService {
         email,
       });
       if (emailInUse) {
-        throw new BadRequestException('Email already in use');
+        throw new Error('Email already in use');
       }
 
       // hash password
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // create user document and save in mongodb
-      await this.userModel.create({
+      const user = await this.userModel.create({
         username,
         email,
         password: hashedPassword,
       });
+
+      return { message: 'User created successfully', email: user.email };
     } catch (e) {
-      console.log(e.message);
+      Logger.error(e.message);
     }
   }
 
@@ -66,7 +68,7 @@ export class AuthService {
 
       return this.generateUserToken(user._id);
     } catch (e) {
-      console.log(e.message);
+      Logger.error(e.message)
     }
   }
 
@@ -79,7 +81,8 @@ export class AuthService {
       if (!token) throw new UnauthorizedException('user should be login again');
       return await this.generateUserToken(token.userId);
     } catch (e) {
-      console.log(e.message);
+      Logger.error(e.message);
+
     }
   }
 
@@ -93,7 +96,7 @@ export class AuthService {
         refreshToken,
       };
     } catch (e) {
-      console.log(e.message);
+      Logger.error(e.message);
     }
   }
 

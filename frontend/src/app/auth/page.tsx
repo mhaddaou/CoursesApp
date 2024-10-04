@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import { Images } from "@/lib/data/ImageData";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import  Register  from "@/components/main/Register";
 import Signin from "@/components/main/Signin";
+import { Context } from "@/context/ContextProvider";
 
 export default function Login() {
-  const [authToggle, setAuthToggle] = useState(false);
+  const context = useContext(Context);
   const authRef = useRef<HTMLDivElement>(null);
   const authRe = useRef<HTMLDivElement>(null);
 
@@ -17,7 +18,7 @@ export default function Login() {
     setTimeout(() => {
       authRef.current?.classList.add("animate-fadeRight");
     }, 0);
-  }, [authToggle]);
+  }, [context?.authToggle]);
 
   return (
     <div className="w-screen h-screen bg-white ">
@@ -41,13 +42,13 @@ export default function Login() {
                 <p className="font-Poppins">Welcome to lorem..!</p>
                 <div className="flex bg-secondary  relative rounded-full py-1.5 px-2 w-1/2 md:w-[35%] gap-4 justify-between text-white font-Poppins">
                   <button
-                    onClick={() => setAuthToggle(false)}
+                    onClick={() => context?.setAuthToggle(false)}
                     className="  py-2 rounded-full w-1/2 relative z-10 "
                   >
                     Login
                   </button>
                   <button
-                    onClick={() => setAuthToggle(true)}
+                    onClick={() => context?.setAuthToggle(true)}
                     className="py-2 rounded-full w-1/2 text-center relative z-10"
                   >
                     Register
@@ -55,14 +56,14 @@ export default function Login() {
                   <div className="absolute  transition-all duration-300 h-full w-full  rounded-full px-2 py-1.5  left-0 top-0">
                     <div
                       className={`w-1/2  transition-all duration-700  h-full bg-primary rounded-full ${
-                        authToggle ? "translate-x-full" : "translate-x-0"
+                        context?.authToggle ? "translate-x-full" : "translate-x-0"
                       }`}
                     ></div>
                   </div>
                 </div>
               </div>
               <div ref={authRef} className="animate-fadeRight px-4 md:px-0">
-                {authToggle ? <Register /> : <Signin />}
+                {context?.authToggle ? <Register /> : <Signin />}
               </div>
             </div>
           </div>

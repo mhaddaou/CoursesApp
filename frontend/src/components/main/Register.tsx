@@ -1,18 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import React, { FormEvent, useEffect } from "react";
+import React, { FormEvent, useContext} from "react";
 import PasswordShow from "../../..//public/assets/icons/password-show.svg";
 import PasswordHidden from "../../../public/assets/icons/password-hidden.svg";
 import { useState } from "react";
 import { signupUser } from "@/utils/restApi";
 import { SignupData } from "@/utils/interfaces";
+import { Context } from "@/context/ContextProvider";
 
 const Register = () => {
+  const context = useContext(Context);
   const [passwordTowgel, setPasswordTowgel] = useState(false);
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log("is submitted");
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData.entries());
     const signupData: SignupData = {
@@ -20,12 +21,19 @@ const Register = () => {
       email: data.email as string,
       password: data.password as string,
     };
-    try{
+    try {
       const response = await signupUser(signupData);
-    }catch(e : any){
+      context?.setUserInfo({
+        username: "",
+        email: response.email,
+        token: "",
+        refreshToken: "",
+      });
+      context?.setRefering(true);
+      context?.setAuthToggle(!context.authToggle);
+    } catch (e: any) {
       console.log(e.message);
     }
-
   }
 
   return (

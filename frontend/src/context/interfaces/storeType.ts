@@ -1,0 +1,35 @@
+import { CoursesList } from "./coursesInterface";
+import { UserInfo } from "./userInterface";
+
+export type StoreType = {
+  userInfo: UserInfo | null;
+  setUserInfo: (userInfo: UserInfo | null) => void;
+  authToggle: boolean;
+  setAuthToggle: (authToggle: boolean) => void;
+  refering: boolean;
+  setRefering: (refering: boolean) => void;
+  logedIn : boolean;
+  setLogedIn : (logedIn : boolean) => void;
+  click : boolean;
+  setClick : (logedIn : boolean) => void;
+  startIndex : number;
+  setStartIndex : (startIndex : number) => void;
+  endIndex : number;
+  setEndIndex : (endIndex : number) => void;
+  itemPerPage : number;
+  setItemPerPage : (itemPerPage : number) => void;
+  coursesList : CoursesList | null ;
+  setCoursesList : (coursesList : CoursesList | null) => void;
+  currentPage : number;
+  setCurrentPage : (currentPage : number) => void;
+  tokenAccess :  string;
+  setTokenAccess : (tokenAccess : string) => void;
+  searchType : string;
+  setSearchType : (searchType : string) => void;
+  searchStartIndex : number;
+  searchSetStartIndex : (startIndex : number) => void;
+  searchItemPerPage : number;
+  searchSetItemPerPage : (itemPerPage : number) => void;
+  searchInput : string;
+  setSearchInput : (searchInput : string) => void;
+};

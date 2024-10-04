@@ -1,13 +1,47 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { FormEvent, useContext, useEffect, useRef } from "react";
 import { useState } from "react";
 import PasswordShow from "../../../public/assets/icons/password-show.svg";
 import PasswordHidden from "../../../public/assets/icons/password-hidden.svg";
+import { Context } from "@/context/ContextProvider";
+import { SigninData } from "@/utils/interfaces";
+import { signinUser } from "@/utils/restApi";
+import { useRouter } from "next/navigation";
 
 const Signin = () => {
+  const context = useContext(Context);
+  const router = useRouter();
   const [passwordTowgel, setPasswordTowgel] = useState(false);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (context?.refering) {
+      passwordRef.current?.focus();
+      if (emailRef.current && context.userInfo?.email) {
+        emailRef.current.value = context.userInfo.email;
+      }
+    }
+  });
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    const signinData: SigninData = {
+      email: data.email as string,
+      password: data.password as string,
+    };
+    try {
+      const response = await signinUser(signinData);
+      localStorage.setItem("token", response.accessToken);
+      context?.setLogedIn(true);
+      router.push("/courses");
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  }
 
   return (
     <div className=" flex flex-col gap-8 font-Poppins">
@@ -15,15 +49,16 @@ const Signin = () => {
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry.
       </p>
-      <form action="">
+      <form onSubmit={onSubmit}>
         <div className="pb-7">
           <label htmlFor="username" className="">
-            User name
+            Email
           </label>
           <div className="w-full  border mt-3 border-primary p-2 rounded-full ">
             <input
-              placeholder="Enter your User name"
-              name="username"
+              ref={emailRef}
+              placeholder="Enter your Email"
+              name="email"
               type="text"
               className="placeholder:text-sm w-full py-1 bg-inherit outline-none px-4 tracking-wide text-slate-700"
             />
@@ -35,6 +70,7 @@ const Signin = () => {
           </label>
           <div className="w-full  border mt-3 border-primary p-2 rounded-full relative ">
             <input
+              ref={passwordRef}
               placeholder="Enter your Password"
               name="password"
               type={`${passwordTowgel ? "text" : "password"}`}

@@ -12,10 +12,35 @@ interface SignupData {
   password: string;
 }
 
-// Define a type for the response from the login API
-interface LoginResponse {
-  token: string;
-  user: User;
+interface SigninData {
+  email: string;
+  password: string;
 }
 
-export type { User, SignupData, LoginResponse };
+// Define a type for the response from the login API
+interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+
+interface SignupResponse {
+  message: string;
+  email: string;
+}
+
+interface PaginationData {
+  startIndex: number | undefined;
+  endIndex: number | undefined;
+  itemPerPage: number | undefined;
+}
+
+
+interface InterfaceSearch {
+  startIndex: number | undefined;
+  itemPerPage: number | undefined;
+  query: string | undefined;
+  searchType : string | undefined;
+}
+
+
+export type { User, SignupData, LoginResponse, SignupResponse, SigninData, PaginationData, InterfaceSearch };
