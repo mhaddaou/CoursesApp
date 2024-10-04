@@ -13,8 +13,6 @@ CoursesApp is a comprehensive course management system that allows users to crea
 - [Frontend Overview](#frontend-overview)
 - [Frontend Technologies Used](#frontend-technologies-used)
 - [Frontend Setup and Installation](#frontend-setup-and-installation)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Backend Overview
 
