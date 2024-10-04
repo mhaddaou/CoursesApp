@@ -13,6 +13,7 @@ CoursesApp is a comprehensive course management system that allows users to crea
 - [Frontend Overview](#frontend-overview)
 - [Frontend Technologies Used](#frontend-technologies-used)
 - [Frontend Setup and Installation](#frontend-setup-and-installation)
+- - [How to use App](#frontend-setup-and-installation)
 
 ## Backend Overview
 
@@ -142,3 +143,31 @@ To set up the frontend locally, follow these steps:
 
 ```
 Access the application: The frontend should now be running at http://localhost:3000.
+
+
+
+# User Guide for the Course Management App
+
+## Using the Application
+
+### Step 1: Sign Up
+1. Open your browser and go to `http://localhost:3000/auth` to access the signup page.
+2. Fill in the required fields to create a new account.
+3. After submitting the signup form, you will be redirected to the login page.
+
+### Step 2: Sign In
+1. After signing up, you will be redirected to the login page.
+2. Enter your credentials (email and password) and click on the **Sign In** button.
+3. Upon successful authentication, you will be redirected to the main dashboard.
+
+### Step 3: Browse Courses
+1. Once logged in, you can view all available courses on the main dashboard.
+2. The courses are displayed using **infinite scrolling**, allowing you to scroll through the list without pagination.
+3. You can create a new course by clicking on the **Create Course** button.
+4. To view more details about a course, click on the **View Course** button.
+
+### Step 4: Search for Courses
+1. Use the search bar available on the dashboard to find courses by **title** or **teacher**.
+2. Type in the relevant keywords and press **Enter** or click the search button to see the filtered results with **infinite scrolling**.
+
+
