@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Images } from "@/lib/data/ImageData";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef} from "react";
 import  Register  from "@/components/main/Register";
 import Signin from "@/components/main/Signin";
 import { Context } from "@/context/ContextProvider";

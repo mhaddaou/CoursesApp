@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGODB_URI=mongodb+srv://mhaddaou:mhaddaou@coursesapp.c1yas.mongodb.net/?retryWrites=true&w=majority&appName=CoursesApp
+      - JWT_SECRET=mhaddaou
+      - JWT_EXPIRATION_TIME=5h 
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend

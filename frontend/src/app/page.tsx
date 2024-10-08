@@ -4,10 +4,9 @@ import NavBar from "@/components/main/Navbar";
 import SkeletonRepeat from "@/components/main/SkeletonRepeat";
 import CourseCard from "@/components/sub/CourseCard";
 import ToastError from "@/components/sub/ToastError";
-import { Context } from "@/context/ContextProvider";
 import { CourseInterface } from "@/context/interfaces/coursesInterface";
 import { getCourses } from "@/utils/restApi";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -21,7 +20,7 @@ export default function Home() {
   const handlMoreCourses = () => {
     const token = localStorage.getItem("token");
     if(token){
-      setMessage('you need first to loggin');
+      setMessage('you are not authorized you need to loggin first');
       setError(true);
     }else{
       router.push('/courses')

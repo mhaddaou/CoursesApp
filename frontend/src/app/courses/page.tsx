@@ -28,11 +28,15 @@ export default function Home() {
       context?.setCoursesList(response);
       setIsLoad(false);
       setLoading(false);
-    } catch (e: any) {
-      setMessage(e.message);
-      if ((e.message = "Invalid Token"))
-        setMessage("you are not authorized you need to loggin first");
-      setError(true);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setMessage(e.message);
+        if ((e.message = "Invalid Token"))
+          setMessage("you are not authorized you need to loggin first");
+        setError(true);
+      } else {
+        console.error('Unknown error', e);
+      }
     }
   };
 

@@ -19,7 +19,7 @@ import { CoursesModule } from './courses/courses.module';
       imports: [ConfigModule],
       useFactory: async (config) => ({
         secret: config.get('jwt.secret'),
-        signOptions: { expiresIn: config.get('jwt.expiryDate') },
+        signOptions: { expiresIn: "10h" },
       }),
       global: true,
       inject: [ConfigService],
