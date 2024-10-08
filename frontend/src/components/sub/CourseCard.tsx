@@ -14,9 +14,10 @@ export default function CourseCard({ course, auth }: { course: CourseInterface, 
       <div className="w-[80%]  mx-auto flex flex-col gap-4">
         <div className="h-[200px] w-full   rounded-lg relative">
           <Image
-            src="/assets/images/BackgroundOne.jpeg"
+            src="/assets/images/backggroundSeven.jpeg"
             alt=""
             fill
+            objectFit="cover"
             className="object-cover rounded-lg border border-blue-light"
           />
         </div>
