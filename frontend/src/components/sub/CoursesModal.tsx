@@ -35,10 +35,11 @@ export default function CoursesModal({
           </button>
         </div>
         <div className="h-[200px]    rounded-lg relative">
-          <Image
-            src="/assets/images/BackgroundOne.jpeg"
+        <Image
+            src="/assets/images/backggroundSeven.jpeg"
             alt=""
             fill
+            objectFit="cover"
             className="object-cover rounded-lg border border-blue-light"
           />
         </div>
